@@ -1,0 +1,18 @@
+{% extends "base.html.twig" %}
+
+{% block stylesheets %}
+	{{parent()}}
+	<link rel="stylesheet" href={{asset("css/signin.css")}}>
+{% endblock %}
+
+{% block content %}
+ {{form_start(registerForm, {'attr': { 'class':'form-signin'}})}}
+    <h1 class="h3 mb-3 font-weight-normal">Please register</h1>
+    {{form_widget(registerForm.username, {'attr': { 'class':'form-control'}})}}
+    {{form_widget(registerForm.email, {'attr': { 'class':'form-control'}})}}
+    {{form_widget(registerForm.password, {'attr': { 'class':'form-control'}})}}
+    <button class="boton-login btn btn-lg btn-primary btn-block" type="submit">Register</button>
+    <p style="text-align: center; margin-top: .5rem;">If you are registered click <a style="text-decoration: underline; color: #f9a519;" href="{{path('homepage')}}">here</a></p>
+    <p style="text-align: center; margin-top: 1rem!important;" class="mt-5 mb-3 text-muted">&copy; 2020</p>
+ {{form_end(registerForm)}}
+{% endblock %}
