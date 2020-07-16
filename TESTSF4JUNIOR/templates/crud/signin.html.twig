@@ -6,15 +6,26 @@
 {% endblock %}
 
 {% block content %}
- {{form_start(signinForm, {'attr': { 'class':'form-signin'}})}}
-    <h1 class="h3 mb-3 font-weight-normal">Please sign in</h1>
-    {{form_widget(signinForm.email, {'attr': { 'class':'form-control'}})}}
-    {{form_widget(signinForm.password, {'attr': { 'class':'form-control'}})}}
-    <input style='width:auto; margin-right:10px; display: inline' class="form-control" type="checkbox" id="remember_me" name="_remember_me" checked/>
-    <label  for="remember_me">Remember me</label>
-    <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
-    <button class="boton-login btn btn-lg btn-primary btn-block" type="submit">Entrar</button>
-    <p style="text-align: center; margin-top: .5rem;">Sign up <a style="text-decoration: underline; color: #f9a519;" href="{{path('registro')}}">here</a></p>
-    <p style="text-align: center; margin-top: 1rem!important;" class="mt-5 mb-3 text-muted">&copy; 2020</p>
- {{form_end(signinForm)}}
+  {{form_start(signinForm, {'attr': { 'class':'form-signin'}})}}
+      {% if error %}
+        <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+      {% endif %}
+
+      {% if app.user %}
+        <div class="mb-3">
+            You are logged in as {{ app.user.username }}, <a href="{{ path('app_logout') }}">Logout</a>
+        </div>
+      {% endif %}
+
+
+      <h1 class="h3 mb-3 font-weight-normal">Please sign in</h1>
+      {{form_widget(signinForm.email, {'attr': { 'class':'form-control'}})}}
+      {{form_widget(signinForm.password, {'attr': { 'class':'form-control'}})}}
+      <input style='width:auto; margin-right:10px; display: inline' class="form-control" type="checkbox" id="remember_me" name="_remember_me" checked/>
+      <label  for="remember_me">Remember me</label>
+      <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
+      <button class="boton-login btn btn-lg btn-primary btn-block" type="submit">Entrar</button>
+      <p style="text-align: center; margin-top: .5rem;">Sign up <a style="text-decoration: underline; color: #f9a519;" href="{{path('registro')}}">here</a></p>
+      <p style="text-align: center; margin-top: 1rem!important;" class="mt-5 mb-3 text-muted">&copy; 2020</p>
+  {{form_end(signinForm)}}
 {% endblock %}

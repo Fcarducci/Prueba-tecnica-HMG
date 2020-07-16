@@ -29,7 +29,6 @@ class FormAuthenticator extends AbstractFormLoginAuthenticator implements Passwo
     private $entityManager;
     private $urlGenerator;
     private $csrfTokenManager;
-    private $passwordEncoder;
 
     public function __construct(EntityManagerInterface $entityManager, UrlGeneratorInterface $urlGenerator, CsrfTokenManagerInterface $csrfTokenManager, UserPasswordEncoderInterface $passwordEncoder)
     {
@@ -48,8 +47,8 @@ class FormAuthenticator extends AbstractFormLoginAuthenticator implements Passwo
     public function getCredentials(Request $request)
     {
         $credentials = [
-            'email' => $request->request->get('email'),
-            'password' => $request->request->get('password'),
+            'email' => $request->request->get('signin_form')['email'],
+            'password' => $request->request->get('signin_form')['password'],
             'csrf_token' => $request->request->get('_csrf_token'),
         ];
         $request->getSession()->set(
@@ -96,8 +95,8 @@ class FormAuthenticator extends AbstractFormLoginAuthenticator implements Passwo
             return new RedirectResponse($targetPath);
         }
 
-        // For example : return new RedirectResponse($this->urlGenerator->generate('some_route'));
-        throw new \Exception('TODO: provide a valid redirect inside '.__FILE__);
+        return new RedirectResponse($this->urlGenerator->generate('users_list'));
+        
     }
 
     protected function getLoginUrl()
