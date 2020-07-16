@@ -4,9 +4,12 @@ namespace App\Controller\Crud;
 
 use App\Form\RegisterForm;
 use App\Form\SigninForm;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
 class CrudController extends AbstractController
 {
@@ -26,9 +29,20 @@ public function home()
  * @Route("/registro", name="registro")
  */
 
-public function registro()
+public function registro(EntityManagerInterface $em, Request $request, UserPasswordEncoderInterface $passwordEncode)
 {
   $form=$this->createForm(RegisterForm::class);
+  $form->handleRequest($request);
+
+   if($form->isSubmitted() && $form->isValid()){
+       $user=$form->getData();
+       $encryptedPassword= $passwordEncode->encodePassword($user, $user->getPassword());
+       $user->setPassword($encryptedPassword);
+       $registeredUser=$user;
+       $em->persist($registeredUser);
+       $em->flush();
+       return $this->redirectToRoute("homepage");
+   }
 
   return $this->render("crud/register.html.twig", ["registerForm"=>$form->createView()]);
 }
