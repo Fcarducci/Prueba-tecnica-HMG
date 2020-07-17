@@ -7,6 +7,7 @@ body {
   display: -ms-flexbox;
   display: -webkit-box;
   display: flex;
+  flex-direction: column;
   -ms-flex-align: center;
   -ms-flex-pack: center;
   -webkit-box-align: center;
@@ -16,7 +17,6 @@ body {
   padding-top: 40px;
   padding-bottom: 40px;
   background-color: #f5f5f5;
-  color: white;
 }
 
 .title{
@@ -30,6 +30,8 @@ body {
   margin: 0 auto;
   background-color: #343a40;
   border-radius: 4px;
+  color: white;
+  display: block;
 }
 .form-signin .checkbox {
   font-weight: 400;
@@ -53,4 +55,21 @@ body {
   margin-bottom: 10px;
   border-top-left-radius: 0;
   border-top-right-radius: 0;
+}
+
+@import url('//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css');
+ 
+.isa_error {
+ margin: 10px 0px;
+ padding:12px;
+ color: #D8000C !important;
+ background-color: #FFD2D2;
+ display: block;
+ width: 24%;
+}
+
+.isa_error i {
+  margin:10px 22px;
+  font-size:1.5em;
+  vertical-align:middle;
 }

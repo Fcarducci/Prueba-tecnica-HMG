@@ -19,9 +19,10 @@ class UpdateUserForm extends AbstractType
       $builder->add('email', EmailType::class, ['attr' => ['placeholder' => 'Email'], 'required'=>false, 'empty_data' => '']);
       $builder->add('password', PasswordType::class, ['attr' => ['placeholder' => 'Password'], 'required'=>false, 'empty_data' => '']);
       $builder->add('roles', ChoiceType::class, ['choices'=>[
+       'Select a role'=>"",
        'User'=>'ROLE_USER',
        'Admin'=>'ROLE_ADMIN'
-      ]]);
+      ], 'required'=>false]);
       $builder->add('comentarios', TextareaType::class, ['attr' => ['placeholder' => 'Write a coment'], 'required'=>false, 'empty_data' => '']);
     }
 

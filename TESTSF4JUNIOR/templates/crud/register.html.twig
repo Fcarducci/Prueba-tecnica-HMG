@@ -6,8 +6,13 @@
 {% endblock %}
 
 {% block content %}
+  {% for message in app.flashes('error') %}
+      <div class="isa_error">
+         <i class="fa fa-times-circle"></i> {{message}}
+      </div>  
+  {% endfor %}
  {{form_start(registerForm, {'attr': { 'class':'form-signin'}})}}
-    <h1 class="h3 mb-3 font-weight-normal">Please register</h1>
+    <h1 class="h3 mb-3 font-weight-normal">Please register an user</h1>
     {{form_widget(registerForm.username, {'attr': { 'class':'form-control'}})}}
     {{form_widget(registerForm.email, {'attr': { 'class':'form-control'}})}}
     {{form_widget(registerForm.password, {'attr': { 'class':'form-control'}})}}
