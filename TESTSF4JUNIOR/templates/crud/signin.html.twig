@@ -25,7 +25,6 @@
       <label  for="remember_me">Remember me</label>
       <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
       <button class="boton-login btn btn-lg btn-primary btn-block" type="submit">Log in</button>
-      <p style="text-align: center; margin-top: .5rem;">Sign up <a style="text-decoration: underline; color: #f9a519;" href="{{path('registro')}}">here</a></p>
       <p style="text-align: center; margin-top: 1rem!important;" class="mt-5 mb-3 text-muted">&copy; 2020</p>
   {{form_end(signinForm)}}
 {% endblock %}
