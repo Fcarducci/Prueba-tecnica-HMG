@@ -20,15 +20,11 @@ class CrudController extends AbstractController
 /**
  * @Route("/", name="homepage")
  */
-/*
+
 public function home()
 {
-    //$form=$this->createForm(SigninForm::class);
-
-    //return $this->render("crud/signin.html.twig", ["signinForm"=>$form->createView()]);
+  return $this->redirectToRoute("app_login");
 }
-*/
-
 
 /**
  * @Route("/registro", name="registro")
@@ -69,16 +65,48 @@ public function deleteUser(User $solicitud, EntityManagerInterface $em)
 {
 $em->remove($solicitud);
 $em->flush();
-die;
 return $this->redirectToRoute("users_list");
 }
 
 /**
  * @Route("/update/{id}", name="update")
  */
-public function updateUser(User $solicitud, EntityManagerInterface $em)
+public function updateUser(User $usuario, EntityManagerInterface $em, Request $request, UserPasswordEncoderInterface $passwordEncode)
 {
   $form=$this->createForm(UpdateUserForm::class);
+  $form->handleRequest($request);
+
+  if($form->isSubmitted() && $form->isValid()){
+    $updatedUser=$form->getData();
+    
+    if($updatedUser['username']!=""){
+      $usuario->setUsername($updatedUser['username']);
+    }
+
+    if($updatedUser['email']!=""){
+      $usuario->setEmail($updatedUser['email']);
+    }
+    
+    if($updatedUser['password']!=""){
+      $encryptedPassword= $passwordEncode->encodePassword($updatedUser, $updatedUser['password']);
+      $usuario->setPassword($encryptedPassword);
+    }
+
+    if($updatedUser['roles']!=""){
+      $roles=[$updatedUser['roles']];
+      $usuario->setRoles($roles);
+    }
+
+    if($updatedUser['comentarios']!=""){
+      $usuario->setComentarios($updatedUser['comentarios']);
+    }
+
+    $em->flush();
+
+    return $this->redirectToRoute("users_list");
+  }
+
+  return $this->render("crud/updateUserForm.html.twig", ["updateForm"=>$form->createView()]);
 }
 
 

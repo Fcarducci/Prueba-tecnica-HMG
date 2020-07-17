@@ -1,0 +1,16 @@
+{% extends "base.html.twig" %}
+
+{% block content %}
+ <div class="update-form">
+  {{form_start(updateForm)}}
+    <div class="form-group">
+      {{form_widget(updateForm.username, {'attr': { 'class':'form-control'}})}}
+      {{form_widget(updateForm.email, {'attr': { 'class':'form-control'}})}}
+      {{form_widget(updateForm.password, {'attr': { 'class':'form-control'}})}}
+      {{form_widget(updateForm.roles, {'attr': { 'class':'form-control'}})}}
+      {{form_widget(updateForm.comentarios, {'attr': { 'class':'form-control'}})}}
+    </div>
+    <button type="submit" class="btn btn-primary mb-2">Update</button>
+  {{form_end(updateForm)}}
+ </div>
+{% endblock %}

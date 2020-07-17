@@ -14,9 +14,9 @@ class RegisterForm extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder->add("username", TextType::class, array("attr"=>array("placeholder"=>"Username", "required" => true)));
-        $builder->add("email", EmailType::class, array("attr"=>array("placeholder"=>"Email", "required" => true)));
-        $builder->add("password", PasswordType::class, array("attr"=>array("placeholder"=>"Contraseña", "required" => true)));
+        $builder->add("username", TextType::class, ['attr' => ['placeholder' => 'Username'], 'required'=>true]);
+        $builder->add("email", EmailType::class, ['attr' => ['placeholder' => 'Email'], 'required'=>true]);
+        $builder->add("password", PasswordType::class, ['attr' => ['placeholder' => 'Password'], 'required'=>true]);
 
     }
 

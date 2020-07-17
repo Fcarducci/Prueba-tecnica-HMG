@@ -13,7 +13,7 @@
   <div class="collapse navbar-collapse justify-content-md-end list-container " id="navbarNav">
    <ul class="navbar-nav">
         <li class="nav-item">
-            <a class="nav-link" href='{{path("app_logout")}}'>Salir</a>
+            <a class="nav-link" href='{{path("app_logout")}}'>Logout</a>
         </li>
    </ul>
   </div>
@@ -27,7 +27,7 @@
           <th scope="col">ROLES</th>
           <th scope="col">PASSWORD</th>
           <th scope="col">USERNAME</th>
-          <th scope="col">COMENTARIO</th>
+          <th scope="col">COMENT</th>
           <th></th>
         </tr>
       </thead>
@@ -57,5 +57,12 @@
         </tbody>
       {% endfor %} 
   </table>
+{% else %}
+    <section style="margin-bottom:0" class="jumbotron">
+      <article style="padding: 5%" class="store">
+      <h1 class="display-4">Oooops an error has occurred!</h1>
+       <p style="font-weight: bold" class="lead">Please <a style="text-decoration: underline; color: #f9a519;" href="{{path('app_login')}}">login</a> or  <a style="text-decoration: underline; color: #f9a519;" href="{{path('registro')}}">sign up</a></p>
+      </article>
+    </section>
 {% endif %}
 {% endblock %}
