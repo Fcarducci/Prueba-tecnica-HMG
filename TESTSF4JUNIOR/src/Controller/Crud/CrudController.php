@@ -12,9 +12,11 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
+//Clase CrudController en donde se desarrola toda la funcionalidad de la aplicacion web.
 class CrudController extends AbstractController
 {
 
+// Redireccion a la ruta con nombre "app_login"
 /**
  * @Route("/", name="homepage")
  */
@@ -24,6 +26,8 @@ public function home()
   return $this->redirectToRoute("app_login");
 }
 
+
+// Ruta a la pagina de registro de usuarios con su correspondiente controlador.
 /**
  * @Route("/registro", name="registro")
  * @IsGranted("ROLE_ADMIN")
@@ -52,6 +56,7 @@ public function registro(EntityManagerInterface $em, Request $request, UserPassw
   return $this->render("crud/register.html.twig", ["registerForm"=>$form->createView()]);
 }
 
+// Ruta a la pagina de usuarios registrados con su correspondiente controlador.
 /**
  * @Route("/users", name="users_list")
  */
@@ -62,6 +67,7 @@ public function usersList(EntityManagerInterface $em)
   return $this->render("crud/usersList.html.twig", ["users"=>$users]);
 }
 
+// Ruta y Controlador para eliminar Usuarios de la base de dato segun el id del usuario seleccionado.
 /**
  * @Route("/users/{id}/delete", name="delete")
  * @IsGranted("ROLE_ADMIN")
@@ -73,6 +79,7 @@ $em->flush();
 return $this->redirectToRoute("users_list");
 }
 
+// Ruta y Controlador para actualizar Usuarios de la base de dato segun el id del usuario seleccionado.
 /**
  * @Route("/update/{id}", name="update")
  * @IsGranted("ROLE_ADMIN")
